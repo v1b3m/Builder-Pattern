@@ -2,6 +2,87 @@ package ug.mak.patterns;
 
 import java.util.Currency;
 
+class BankAccountBuilder {
+	//required
+	final int NiN;
+		
+	// optional
+	String email;
+	String firstName;
+	String middlename;
+	String surname;
+	String StreetAddress;
+	long postalCode;
+	String country;
+	String city;
+	long mobileNumber;
+	String mobileMoneyProvider;
+	Currency balance;
+	
+	public BankAccountBuilder(int NiN) {
+		this.NiN = NiN;
+	}
+	
+	public BankAccountBuilder addEmail(String email) {
+		this.email = email;
+		return this;
+	}
+	
+	public BankAccountBuilder addFirstName(String firstName) {
+		this.firstName = firstName;
+		return this;
+	}
+	
+	public BankAccountBuilder addMiddleName(String middlename) {
+		this.middlename = middlename;
+		return this;
+	}
+	
+	public BankAccountBuilder addSurname(String surname) {
+		this.surname = surname;
+		return this;
+	}
+	
+	public BankAccountBuilder addStreetAddress(String StreetAddress) {
+		this.StreetAddress = StreetAddress;
+		return this;
+	}
+	
+	public BankAccountBuilder addPostalCode(long postalCode) {
+		this.postalCode = postalCode;
+		return this;
+	}
+	
+	public BankAccountBuilder addCountry(String country) {
+		this.country = country;
+		return this;
+	}
+	
+	public BankAccountBuilder addCity(String city) {
+		this.city = city;
+		return this;
+	}
+	
+	public BankAccountBuilder addMobileNumber(long mobileNumber) {
+		this.mobileNumber = mobileNumber;
+		return this;
+	}
+	
+	public BankAccountBuilder addMobileMoneyProvider(String mobileMoneyProvider) {
+		this.mobileMoneyProvider = mobileMoneyProvider;
+		return this;
+	}
+	
+	public BankAccountBuilder addBalance(Currency balance) {
+		this.balance = balance;
+		return this;
+	}
+	
+	public BankAccount build() {
+		return new BankAccount(this);
+	}
+}
+
 public class BankAccount {
 	int NiN;
 	String email;
@@ -16,88 +97,7 @@ public class BankAccount {
 	String mobileMoneyProvider;
 	Currency balance;
 	
-	public static class Builder {
-		//required
-		private final int NiN;
-		
-		// optional
-		private String email;
-		private String firstName;
-		private String middlename;
-		private String surname;
-		private String StreetAddress;
-		private long postalCode;
-		private String country;
-		private String city;
-		private long mobileNumber;
-		private String mobileMoneyProvider;
-		private Currency balance;
-		
-		public Builder(int NiN) {
-			this.NiN = NiN;
-		}
-		
-		public Builder addEmail(String email) {
-			this.email = email;
-			return this;
-		}
-		
-		public Builder addFirstName(String firstName) {
-			this.firstName = firstName;
-			return this;
-		}
-		
-		public Builder addMiddleName(String middlename) {
-			this.middlename = middlename;
-			return this;
-		}
-		
-		public Builder addSurname(String surname) {
-			this.surname = surname;
-			return this;
-		}
-		
-		public Builder addStreetAddress(String StreetAddress) {
-			this.StreetAddress = StreetAddress;
-			return this;
-		}
-		
-		public Builder addPostalCode(long postalCode) {
-			this.postalCode = postalCode;
-			return this;
-		}
-		
-		public Builder addCountry(String country) {
-			this.country = country;
-			return this;
-		}
-		
-		public Builder addCity(String city) {
-			this.city = city;
-			return this;
-		}
-		
-		public Builder addMobileNumber(long mobileNumber) {
-			this.mobileNumber = mobileNumber;
-			return this;
-		}
-		
-		public Builder addMobileMoneyProvider(String mobileMoneyProvider) {
-			this.mobileMoneyProvider = mobileMoneyProvider;
-			return this;
-		}
-		
-		public Builder addBalance(Currency balance) {
-			this.balance = balance;
-			return this;
-		}
-		
-		public BankAccount build() {
-			return new BankAccount(this);
-		}
-	}
-	
-	private BankAccount(Builder builder) {
+	public BankAccount(BankAccountBuilder builder) {
 		NiN = builder.NiN;
 		email = builder.email;
 		firstName = builder.firstName;
@@ -111,9 +111,9 @@ public class BankAccount {
 		mobileMoneyProvider = builder.mobileMoneyProvider;
 		balance = builder.balance;
 	}
-	
+
 	public static void main(String[] args) {
-		BankAccount myAccount = new BankAccount.Builder(21)
+		BankAccount myAccount = new BankAccountBuilder(21)
 				.addEmail("allan.com")
 				.addFirstName("allan")
 				.addSurname("Okedi")
